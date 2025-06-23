@@ -6,13 +6,13 @@
 //
 
 import SwiftUI
+import Lottie
 
 struct LoadingAnimation: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        LottieView(name: "loading-spinner", loopMode: .loop)
+            .frame(height: 120)
+            .transition(.opacity)
+            .animation(.easeInOut(duration: 0.5), value: true)
     }
-}
-
-#Preview {
-    LoadingAnimation()
 }

@@ -6,13 +6,13 @@
 //
 
 import SwiftUI
+import Lottie
 
 struct ErrorAnimation: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        LottieView(name: "error-cross", loopMode: .playOnce)
+            .frame(height: 180)
+            .transition(.opacity)
+            .animation(.easeInOut(duration: 0.5), value: true)
     }
-}
-
-#Preview {
-    ErrorAnimation()
 }

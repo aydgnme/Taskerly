@@ -13,24 +13,38 @@ struct TaskCardView: View {
     let dueDate: Date
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 10) {
             Text(title)
                 .font(.headline)
-            
-            HStack {
+                .foregroundColor(.primary)
+            HStack(spacing: 10) {
                 Label("Due: \(dueDate.formatted(date: .abbreviated, time: .shortened))", systemImage: "calendar")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
                 Spacer()
-                Circle()
-                    .fill(priority.color)
-                    .frame(width: 12, height: 12)
+                HStack(spacing: 4) {
+                    Circle()
+                        .fill(priority.color)
+                        .frame(width: 10, height: 10)
+                    Text(priority.displayName)
+                        .font(.caption)
+                        .foregroundColor(priority.color)
+                }
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(
+                    Capsule()
+                        .fill(priority.color.opacity(0.12))
+                )
             }
-            .font(.subheadline)
-            .foregroundColor(.secondary)
         }
-        .padding()
-        .background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 16))
-        .shadow(radius: 2)
+        .padding(16)
+        .background(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .fill(Color("AppCard", bundle: nil) ?? Color.white)
+                .shadow(color: Color(.systemGray3).opacity(0.18), radius: 6, x: 0, y: 2)
+        )
+        .padding(.vertical, 2)
     }
 }
 

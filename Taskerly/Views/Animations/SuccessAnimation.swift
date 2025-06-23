@@ -6,13 +6,13 @@
 //
 
 import SwiftUI
+import Lottie
 
 struct SuccessAnimation: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        LottieView(name: "success-check", loopMode: .playOnce)
+            .frame(height: 180)
+            .transition(.opacity)
+            .animation(.easeInOut(duration: 0.5), value: true)
     }
-}
-
-#Preview {
-    SuccessAnimation()
 }

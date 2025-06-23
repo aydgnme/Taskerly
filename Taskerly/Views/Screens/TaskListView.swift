@@ -10,10 +10,16 @@ struct TaskListView: View {
     @StateObject private var viewModel = TaskListViewModel()
     @State private var showAddTask = false
     @State private var selectedTask: TaskEntity?
+    @State private var showSuccess = false
+    @State private var showError = false
+    @State private var isLoading = false
 
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
+                // Use app background color
+                Color("AppBackground")
+                    .ignoresSafeArea()
                 if viewModel.tasks.isEmpty {
                     EmptyStateView()
                         .transition(.opacity)
@@ -63,6 +69,22 @@ struct TaskListView: View {
                 
                 .sheet(item: $selectedTask) { task in
                     TaskEditView(task: task)
+                }
+
+                if isLoading {
+                    LoadingAnimation()
+                        .frame(width: 100, height: 100)
+                        .zIndex(10)
+                }
+                if showSuccess {
+                    SuccessAnimation()
+                        .frame(width: 120, height: 120)
+                        .zIndex(10)
+                }
+                if showError {
+                    ErrorAnimation()
+                        .frame(width: 120, height: 120)
+                        .zIndex(10)
                 }
             }
             .navigationTitle("My Tasks")
